@@ -550,6 +550,7 @@
                 document.getElementById('restartBtn').style.display = 'inline-block';
                 initGame();
                 gameRunning = true;
+            gameLoop();
                 gamePaused = false;
             }
         });
@@ -559,8 +560,10 @@
         });
 
         document.getElementById('startBtn').addEventListener('click', () => {
+            document.getElementById('gameOver').style.display = 'none';
             initGame();
             gameRunning = true;
+            gameLoop();
             document.getElementById('startBtn').style.display = 'none';
         });
 
@@ -568,6 +571,7 @@
             document.getElementById('gameOver').style.display = 'none';
             initGame();
             gameRunning = true;
+            gameLoop();
             gamePaused = false;
         });
 
