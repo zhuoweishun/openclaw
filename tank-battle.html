@@ -68,12 +68,13 @@
     </div>
     <canvas id="gameCanvas" width="520" height="520"></canvas>
     <div class="controls">
-        <p>WASD 移动 | J 发射子弹 | P 暂停 | R 重新开始</p>
+        <p>WASD 移动 | 空格发射子弹 | P 暂停 | R 重新开始</p>
     </div>
     <div id="gameOver">
         <h1 id="gameOverText">游戏结束</h1>
         <p>最终得分：<span id="finalScore">0</span></p>
-        <button id="restartBtn">重新开始</button>
+        <button id="startBtn" style="display:inline-block;">开始游戏</button>
+        <button id="restartBtn" style="display:none;">重新开始</button>
     </div>
 
     <script>
@@ -468,6 +469,8 @@
             document.getElementById('gameOverText').textContent = base?.destroyed ? '基地被毁！' : '游戏结束';
             document.getElementById('finalScore').textContent = score;
             document.getElementById('gameOver').style.display = 'block';
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('restartBtn').style.display = 'inline-block';
         }
 
         function updateUI() {
@@ -501,7 +504,7 @@
             if (keys['a'] || keys['A']) { dx = -1; dy = 0; player.direction = DIRECTIONS.LEFT; }
             if (keys['d'] || keys['D']) { dx = 1; dy = 0; player.direction = DIRECTIONS.RIGHT; }
             if (dx !== 0 || dy !== 0) player.move(dx, dy);
-            if (keys['j'] || keys['J']) {
+            if (keys[' '] || keys['j'] || keys['J']) {
                 const bullet = player.shoot();
                 if (bullet) bullets.push(bullet);
             }
@@ -543,6 +546,8 @@
             if (e.key === 'p' || e.key === 'P') gamePaused = !gamePaused;
             if (e.key === 'r' || e.key === 'R') {
                 document.getElementById('gameOver').style.display = 'none';
+                document.getElementById('startBtn').style.display = 'none';
+                document.getElementById('restartBtn').style.display = 'inline-block';
                 initGame();
                 gameRunning = true;
                 gamePaused = false;
@@ -551,6 +556,12 @@
 
         document.addEventListener('keyup', (e) => {
             keys[e.key] = false;
+        });
+
+        document.getElementById('startBtn').addEventListener('click', () => {
+            initGame();
+            gameRunning = true;
+            document.getElementById('startBtn').style.display = 'none';
         });
 
         document.getElementById('restartBtn').addEventListener('click', () => {
