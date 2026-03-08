@@ -1,0 +1,43 @@
+# 操作系统
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# 编辑器
+.vscode/
+.idea/
+*.sublime-*
+
+# 日志
+*.log
+logs/
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# 敏感信息（重要！）
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+secrets/
+
+# 依赖
+node_modules/
+__pycache__/
+*.pyc
+vendor/
+
+# 构建输出
+dist/
+build/
+*.min.js
+
+# Claude Code
+.claude/
+AUTHORIZATION.md
